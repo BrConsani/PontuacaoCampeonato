@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Pontuação de Campeonato</string>
+    <string name="button_save">Salvar</string>
+    <string name="button_erase">Apagar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="title_activity_championship">Campeonatos</string>
+    <string name="title_activity_step">Etapas</string>
+    <string name="title_activity_pilot">Pilotos</string>
+    <string name="title_activity_races">Baterias</string>
+    <string name="title_dialog_championship">Criar campeonato</string>
+    <string name="title_dialog_racesteps">Criar etapa</string>
+    <string name="title_dialog_pilot">Criar piloto</string>
+    <string name="title_dialog_race">Criar bateria</string>
+    <string name="message_dialog_championship">Digite o nome do campeonato:</string>
+    <string name="message_dialog_racesteps">Digite o nome da etapa:</string>
+    <string name="message_dialog_pilot">Digite o nome do piloto:</string>
+    <string name="message_dialog_race">Digite o nome/numeração da bateria:</string>
+    <string name="navigation_pilots">Pilotos</string>
+    <string name="lb_erase_championship">Deseja apagar o campeonato?</string>
+    <string name="lb_erase_race_steps">Deseja apagar a etapa?</string>
+    <string name="lb_erase_pilot">Deseja apagar o piloto?</string>
+    <string name="lb_erase_race">Deseja apagar a bateria?</string>
+    <string name="intent_championship">CHAMPIONSHIP</string>
+    <string name="intent_indexC">INDEX_C</string>
+    <string name="intent_indexS">INDEX_S</string>
+</resources>
