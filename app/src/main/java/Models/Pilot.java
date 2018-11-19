@@ -1,11 +1,15 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Pilot implements Serializable {
 
     private String name;
     private int points;
+    private List<Race> races = new ArrayList<>();
+    private List<Race> discards = new ArrayList<>();
 
     public Pilot(String name) {
         this.name = name;
@@ -27,4 +31,9 @@ public class Pilot implements Serializable {
         this.points += points;
     }
 
+    public List<Race> getDiscards(){return discards;}
+
+    public void addDiscards(Race discard){ discards.add(discard);}
+
+    public List<Race> getRaces(){return races;}
 }

@@ -2,20 +2,18 @@ package br.com.beirario.pontuacaocampeonatos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import Adapters.AdapterRaces;
-import Adapters.AdapterStep;
 import Models.Championship;
 import Models.ManageLists;
 import Models.Race;
-import Models.RaceSteps;
 import Repository.MainRepository;
 import ViewModel.Dialogs;
 
@@ -61,6 +59,14 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 0 && resultCode == RESULT_OK){
+            championship = (Championship) data.getSerializableExtra(getString(R.string.intent_championship));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void btnCreateRace(View view){

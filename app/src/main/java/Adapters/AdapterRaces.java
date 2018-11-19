@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import Holders.DefaultHolder;
 import br.com.beirario.pontuacaocampeonatos.R;
+import br.com.beirario.pontuacaocampeonatos.ViewRaceClassification;
 import br.com.beirario.pontuacaocampeonatos.ViewRaces;
 
 public class AdapterRaces extends RecyclerView.Adapter<DefaultHolder>{
@@ -29,7 +31,7 @@ public class AdapterRaces extends RecyclerView.Adapter<DefaultHolder>{
     @Override
     public void onBindViewHolder(@NonNull DefaultHolder holderStep, int i) {
         holderStep.getName().setText(owner.championship.getSteps().get(owner.indexStep).getRaces().get(i).getName());
-        //holderStep.getSelf().setOnClickListener(view -> showPoints(i));
+        holderStep.getSelf().setOnClickListener(view -> showRaceClassification(i));
         holderStep.getSelf().setOnLongClickListener(view -> removeFromList(i));
     }
 
@@ -54,8 +56,13 @@ public class AdapterRaces extends RecyclerView.Adapter<DefaultHolder>{
         return true;
     }
 
-    private void showPoints(int position){
-        //Implementar mudança de tela.
+    private void showRaceClassification(int position){
+        Intent intent = new Intent(owner, ViewRaceClassification.class);
+        intent.putExtra(owner.getString(R.string.intent_championship), owner.championship);
+        intent.putExtra(owner.getString(R.string.intent_indexC), owner.indexChampionship);
+        intent.putExtra(owner.getString(R.string.intent_indexS), owner.indexStep);
+        intent.putExtra(owner.getString(R.string.intent_indexR), position);
+        owner.startActivityForResult(intent, 0);
     }
 }
 

@@ -1,5 +1,6 @@
 package Adapters;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +9,8 @@ import android.view.ViewGroup;
 
 import Holders.DefaultHolder;
 import br.com.beirario.pontuacaocampeonatos.R;
+import br.com.beirario.pontuacaocampeonatos.ViewDiscards;
 import br.com.beirario.pontuacaocampeonatos.ViewPilots;
-import br.com.beirario.pontuacaocampeonatos.ViewRaces;
 
 public class AdapterPilots extends RecyclerView.Adapter<DefaultHolder>{
 
@@ -30,7 +31,7 @@ public class AdapterPilots extends RecyclerView.Adapter<DefaultHolder>{
     @Override
     public void onBindViewHolder(@NonNull DefaultHolder holderStep, int i) {
         holderStep.getName().setText(owner.championship.getPilots().get(i).getName());
-        //holderStep.getSelf().setOnClickListener(view -> showDiscards(i));
+        holderStep.getSelf().setOnClickListener(view -> showDiscards(i));
         holderStep.getSelf().setOnLongClickListener(view -> removeFromList(i));
     }
 
@@ -56,7 +57,11 @@ public class AdapterPilots extends RecyclerView.Adapter<DefaultHolder>{
     }
 
     private void showDiscards(int position){
-        //Implementar mudança de tela.
+        Intent intent = new Intent(owner, ViewDiscards.class);
+        intent.putExtra(owner.getString(R.string.intent_championship), owner.championship);
+        intent.putExtra(owner.getString(R.string.intent_indexC), owner.indexChampionship);
+        intent.putExtra(owner.getString(R.string.intent_indexD), position);
+        owner.startActivityForResult(intent, 0);
     }
 }
 

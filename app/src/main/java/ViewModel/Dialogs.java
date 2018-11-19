@@ -5,10 +5,14 @@ import android.support.v7.app.AlertDialog;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Models.ManageLists;
+import Models.Pilot;
+import Models.Race;
 import br.com.beirario.pontuacaocampeonatos.R;
 
 import static Util.Converters.convertDpToPx;
@@ -16,7 +20,6 @@ import static Util.Converters.convertDpToPx;
 public abstract class Dialogs {
 
     public static void dialogPickName(Context sender, String title, String message){
-
         final AlertDialog.Builder alert = new AlertDialog.Builder(sender);
         final EditText input = new EditText(sender);
         input.setSingleLine();
@@ -41,6 +44,33 @@ public abstract class Dialogs {
         alert.show();
     }
 
+    public static void dialogPickDiscards(Context sender, Pilot pilot, String title, String message){
+        List<Race> discards = new ArrayList<>();
+        final AlertDialog.Builder alert = new AlertDialog.Builder(sender);
+        alert.setTitle(title);
+        alert.setMessage(message);
+        /*alert.setPositiveButton(R.string.button_save, (dialog, which) -> {
+            if(!input.getText().toString().equals("")){
+                ((ManageLists)sender).addObject(input.getText().toString());
+            }else{
+                Toast.makeText(sender,"Você não digitou um nome válido!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
 
+        })*/
+        pilot = new Pilot("rei");
+        pilot.getRaces().add(new Race("1 bateria"));
 
+        alert.setMultiChoiceItems(getAllNames(pilot), null, (dialog, which, isChecked) -> System.out.println("teste"));
+        alert.show();
+    }
+
+    private static String[] getAllNames(Pilot pilot){
+        List<String> response = new ArrayList<>();
+        for (Race x: pilot.getRaces()
+             ) {
+            response.add(x.getName());
+        }
+        return response.toArray(new String[0]);
+    }
 }

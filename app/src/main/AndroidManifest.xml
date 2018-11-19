@@ -40,6 +40,15 @@
                 android:value="br.com.beirario.pontuacaocampeonatos.ViewSteps" />
         </activity>
         <activity
+            android:name=".ViewDiscards"
+            android:label="@string/title_activity_discards"
+            android:parentActivityName=".ViewPilots"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.beirario.pontuacaocampeonatos.ViewPilots" />
+        </activity>
+        <activity
             android:name=".ViewRaces"
             android:label="@string/title_activity_races"
             android:parentActivityName=".ViewSteps"
@@ -47,6 +56,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.beirario.pontuacaocampeonatos.ViewSteps" />
+        </activity>
+        <activity
+            android:name=".ViewRaceClassification"
+            android:label="@string/title_activity_races_classification"
+            android:parentActivityName=".ViewRaces"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.beirario.pontuacaocampeonatos.ViewRaces" />
         </activity>
     </application>
 
