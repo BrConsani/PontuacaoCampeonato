@@ -54,14 +54,11 @@ public abstract class Dialogs {
         List<Race> discards = new ArrayList<>();
         String[] discardsName = getAllDiscards(sender,pilot);
 
-        builder.setMultiChoiceItems(discardsName, null, new DialogInterface.OnMultiChoiceClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                if(isChecked){
-                    discards.add(getRace(sender, discardsName, which));
-                }else{
-                    discards.remove(getRace(sender, discardsName, which));
-                }
+        builder.setMultiChoiceItems(discardsName, null, (dialog, which, isChecked) -> {
+            if(isChecked){
+                discards.add(getRace(sender, discardsName, which));
+            }else{
+                discards.remove(getRace(sender, discardsName, which));
             }
         });
 

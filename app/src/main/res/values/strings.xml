@@ -16,6 +16,7 @@
     <string name="title_dialog_discard">Escolha quais baterias deseja descartar:</string>
     <string name="title_dialog_race">Criar bateria</string>
     <string name="title_dialog_race_classification">Escolha um piloto:</string>
+    <string name="title_dialog_step_pole_position">Escolha um piloto:</string>
     <string name="message_dialog_championship">Digite o nome do campeonato:</string>
     <string name="message_dialog_racesteps">Digite o nome da etapa:</string>
     <string name="message_dialog_pilot">Digite o nome do piloto:</string>
@@ -29,6 +30,7 @@
     <string name="lb_erase_discard">Deseja retirar o descarte?</string>
     <string name="lb_erase_race">Deseja apagar a bateria?</string>
     <string name="lb_pts">pts:</string>
+    <string name="lb_pole">Pole position:</string>
     <string name="toast_error_race_classification">Não existem mais competidores para serem removidos!</string>
     <string name="intent_championship">CHAMPIONSHIP</string>
     <string name="intent_indexC">INDEX_CHAMPIONSHIP</string>

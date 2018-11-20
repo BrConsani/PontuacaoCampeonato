@@ -1,9 +1,11 @@
 package br.com.beirario.pontuacaocampeonatos;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,7 @@ import android.view.View;
 import Adapters.AdapterRaces;
 import Models.Championship;
 import Models.ManageLists;
+import Models.Pilot;
 import Models.Race;
 import Repository.MainRepository;
 import ViewModel.Dialogs;
@@ -22,6 +25,7 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
     public Championship championship;
     public int indexChampionship;
     public int indexStep;
+    public CardView poleCard;
 
     private AdapterRaces cardViewAdapter;
     private RecyclerView cardsViewer;
@@ -37,6 +41,9 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
         championship = (Championship) getIntent().getSerializableExtra(getString(R.string.intent_championship));
         indexChampionship = getIntent().getIntExtra(getString(R.string.intent_indexC), 0);
         indexStep = getIntent().getIntExtra(getString(R.string.intent_indexS), 0);
+
+        poleCard = findViewById(R.id.poleView);
+        poleCard.setOnClickListener(v -> changePilot());
 
         cardViewAdapter = new AdapterRaces(this);
         RecyclerView.LayoutManager cardViewManager = new LinearLayoutManager(this);
@@ -84,5 +91,28 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
         championship.getSteps().get(indexStep).getRaces().add(race);
         cardViewAdapter.notifyItemInserted(cardViewAdapter.getItemCount());
         salvarObjeto();
+    }
+
+    private void changePilot(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(this.getString(R.string.title_dialog_step_pole_position));
+
+        builder.setItems(nomesPilotos(), (arg0, arg1) -> {
+            this.championship.getSteps().get(this.indexStep).setPolePosition(this.championship.getPilots().get(arg1));
+            cardViewAdapter.notifyDataSetChanged();
+            this.salvarObjeto();
+        });
+
+        builder.show();
+    }
+
+    private String[] nomesPilotos(){
+        String[] names = new String[this.championship.getPilots().size()];
+        int index = 0;
+        for (Pilot p : this.championship.getPilots()) {
+            names[index] = p.getName();
+            index++;
+        }
+        return names;
     }
 }

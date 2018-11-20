@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import Holders.DefaultHolder;
 import br.com.beirario.pontuacaocampeonatos.R;
@@ -33,6 +34,8 @@ public class AdapterRaces extends RecyclerView.Adapter<DefaultHolder>{
         holderStep.getName().setText(owner.championship.getSteps().get(owner.indexStep).getRaces().get(i).getName());
         holderStep.getSelf().setOnClickListener(view -> showRaceClassification(i));
         holderStep.getSelf().setOnLongClickListener(view -> removeFromList(i));
+        TextView txt = owner.poleCard.findViewById(R.id.nameCard);
+        txt.setText(owner.championship.getSteps().get(owner.indexStep).getPolePosition().getName());
     }
 
     @Override
