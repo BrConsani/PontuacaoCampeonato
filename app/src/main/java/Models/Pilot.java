@@ -33,7 +33,19 @@ public class Pilot implements Serializable {
 
     public List<Race> getDiscards(){return discards;}
 
+    public void setDiscards(List<Race> discards){this.discards = discards;}
+
     public void addDiscards(Race discard){ discards.add(discard);}
 
     public List<Race> getRaces(){return races;}
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean equal = false;
+
+        if(((Pilot) obj).getName().equals(this.getName())){
+            equal = true;
+        }
+        return equal;
+    }
 }

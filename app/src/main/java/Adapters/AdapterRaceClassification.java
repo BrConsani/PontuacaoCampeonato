@@ -39,6 +39,9 @@ public class AdapterRaceClassification extends RecyclerView.Adapter<RaceClassifi
         holderStep.getPositionClassification().setText(String.format("%dº", (i+1)));
         holderStep.getSelf().setOnClickListener(view -> changePilot(i));
 
+        if(owner.championship.getSteps().get(owner.indexStep)
+                .getRaces().get(owner.indexRace)
+                .getPointsPosition().get(i) != null)
         holderStep.getPoints().setText(String.format("%d", Integer.parseInt(owner.championship.getSteps().get(owner.indexStep)
                                                             .getRaces().get(owner.indexRace)
                                                             .getPointsPosition().get(i).toString())));
@@ -50,17 +53,17 @@ public class AdapterRaceClassification extends RecyclerView.Adapter<RaceClassifi
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                owner.championship.getSteps().get(owner.indexStep)
+                        .getRaces().get(owner.indexRace)
+                        .getPointsPosition().set(holderStep.getAdapterPosition(),
+                        !holderStep.getPoints().getText().toString().equals("") ?
+                                Integer.parseInt(holderStep.getPoints().getText().toString()):null);
+                owner.salvarObjeto();
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                owner.championship.getSteps().get(owner.indexStep)
-                        .getRaces().get(owner.indexRace)
-                        .getPointsPosition().set(i,
-                        !holderStep.getPoints().getText().toString().equals("") ?
-                                Integer.parseInt(holderStep.getPoints().getText().toString()):null);
-                owner.salvarObjeto();
+
             }
         });
     }

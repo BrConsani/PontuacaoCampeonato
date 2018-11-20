@@ -24,4 +24,14 @@ public class RaceSteps implements Serializable {
     public List<Race> getRaces(){return races;}
 
     public void addRaces(Race race){races.add(race);}
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean equal = false;
+
+        if(((RaceSteps) obj).getName().equals(this.getName())){
+            equal = true;
+        }
+        return equal;
+    }
 }

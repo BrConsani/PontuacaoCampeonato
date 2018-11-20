@@ -11,12 +11,10 @@ import android.view.View;
 
 import Adapters.AdapterDiscards;
 import Models.Championship;
-import Models.ManageLists;
-import Models.Pilot;
 import Repository.MainRepository;
 import ViewModel.Dialogs;
 
-public class ViewDiscards extends AppCompatActivity implements ManageLists {
+public class ViewDiscards extends AppCompatActivity{
 
     public Championship championship;
     public int indexChampionship;
@@ -62,19 +60,15 @@ public class ViewDiscards extends AppCompatActivity implements ManageLists {
 
     public void btnCreatePilot(View view){
         Dialogs.dialogPickDiscards(this, championship.getPilots().get(indexPilot),
-                getString(R.string.title_dialog_discard),
-                getString(R.string.message_dialog_discard));
+                getString(R.string.title_dialog_discard));
     }
 
     public void salvarObjeto(){
         MainRepository.salvarObjeto(this, championship, indexChampionship);
     }
 
-    @Override
-    public void addObject(String name) {
-        Pilot pilot = new Pilot(name);
-        championship.getPilots().add(pilot);
-        cardViewAdapter.notifyItemInserted(cardViewAdapter.getItemCount());
+    public void notifyChange(){
+        cardViewAdapter.notifyDataSetChanged();
         salvarObjeto();
     }
 }

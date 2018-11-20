@@ -80,6 +80,7 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
     @Override
     public void addObject(String name) {
         Race race = new Race(name);
+        race.setStep(championship.getSteps().get(indexStep));
         championship.getSteps().get(indexStep).getRaces().add(race);
         cardViewAdapter.notifyItemInserted(cardViewAdapter.getItemCount());
         salvarObjeto();

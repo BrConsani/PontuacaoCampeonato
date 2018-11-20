@@ -1,12 +1,14 @@
 package Adapters;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import Holders.DefaultHolder;
+import Models.Race;
+import Models.RaceSteps;
 import br.com.beirario.pontuacaocampeonatos.R;
 import br.com.beirario.pontuacaocampeonatos.ViewDiscards;
 
@@ -26,10 +28,13 @@ public class AdapterDiscards extends RecyclerView.Adapter<DefaultHolder>{
                 .inflate(R.layout.card_discard, viewGroup, false));
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull DefaultHolder holderStep, int i) {
-        holderStep.getName().setText(owner.championship.getPilots().get(owner.indexPilot).getDiscards().get(i).getName());
-        holderStep.getSelf().setOnLongClickListener(view -> removeFromList(i));
+        holderStep.getName().setText(String.format("%s - %s - %dpts",
+                owner.championship.getPilots().get(owner.indexPilot).getDiscards().get(i).getStep(),
+                owner.championship.getPilots().get(owner.indexPilot).getDiscards().get(i).getName(),
+                getPoints(i)));
     }
 
     @Override
@@ -38,19 +43,14 @@ public class AdapterDiscards extends RecyclerView.Adapter<DefaultHolder>{
                 ? owner.championship.getPilots().get(owner.indexPilot).getDiscards().size() : 0;
     }
 
-    private boolean removeFromList(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(owner);
-        builder.setTitle(R.string.lb_erase_discard);
-        builder.setPositiveButton(R.string.button_remove, (arg0, arg1) -> {
-            owner.championship.getPilots().get(owner.indexPilot).getDiscards().remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, owner.championship.getPilots().get(owner.indexPilot).getDiscards().size());
-            owner.salvarObjeto();
-        });
-        builder.setNegativeButton(R.string.button_cancel, null);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-        return true;
+    private int getPoints(int position){
+        int indexStep = owner.championship.getSteps().indexOf(
+                new RaceSteps(owner.championship.getPilots().get(owner.indexPilot).getDiscards().get(position).getStep()));
+        int indexRace = owner.championship.getSteps().get(indexStep).getRaces().indexOf(
+                new Race(owner.championship.getPilots().get(owner.indexPilot).getDiscards().get(position).getName()));
+        int indexPilot = owner.championship.getSteps().get(indexStep).getRaces().get(indexRace)
+                .getPilotsPosition().indexOf(owner.championship.getPilots().get(owner.indexPilot));
+        return owner.championship.getSteps().get(indexStep).getRaces().get(indexRace).getPointsPosition().get(indexPilot);
     }
 }
 

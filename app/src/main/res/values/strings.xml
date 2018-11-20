@@ -13,7 +13,7 @@
     <string name="title_dialog_championship">Criar campeonato</string>
     <string name="title_dialog_racesteps">Criar etapa</string>
     <string name="title_dialog_pilot">Criar piloto</string>
-    <string name="title_dialog_discard">Adicionar descartes</string>
+    <string name="title_dialog_discard">Escolha quais baterias deseja descartar:</string>
     <string name="title_dialog_race">Criar bateria</string>
     <string name="title_dialog_race_classification">Escolha um piloto:</string>
     <string name="message_dialog_championship">Digite o nome do campeonato:</string>

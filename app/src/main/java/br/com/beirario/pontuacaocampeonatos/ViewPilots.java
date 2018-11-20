@@ -2,6 +2,7 @@ package br.com.beirario.pontuacaocampeonatos;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import Adapters.AdapterPilots;
-import Adapters.AdapterRaces;
 import Models.Championship;
 import Models.ManageLists;
 import Models.Pilot;
-import Models.Race;
 import Repository.MainRepository;
 import ViewModel.Dialogs;
 
@@ -42,6 +41,14 @@ public class ViewPilots extends AppCompatActivity implements ManageLists {
         cardsViewer = findViewById(R.id.contentView);
         cardsViewer.setLayoutManager(cardViewManager);
         cardsViewer.setAdapter(cardViewAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 0 && resultCode == RESULT_OK){
+            championship = (Championship) data.getSerializableExtra(getString(R.string.intent_championship));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

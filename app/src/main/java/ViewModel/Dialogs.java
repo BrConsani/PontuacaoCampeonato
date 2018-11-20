@@ -1,6 +1,7 @@
 package ViewModel;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -13,7 +14,9 @@ import java.util.List;
 import Models.ManageLists;
 import Models.Pilot;
 import Models.Race;
+import Models.RaceSteps;
 import br.com.beirario.pontuacaocampeonatos.R;
+import br.com.beirario.pontuacaocampeonatos.ViewDiscards;
 
 import static Util.Converters.convertDpToPx;
 
@@ -44,33 +47,67 @@ public abstract class Dialogs {
         alert.show();
     }
 
-    public static void dialogPickDiscards(Context sender, Pilot pilot, String title, String message){
+    public static void dialogPickDiscards(Context sender, Pilot pilot, String title){
+        AlertDialog.Builder builder = new AlertDialog.Builder(sender);
+        builder.setTitle(title);
+
         List<Race> discards = new ArrayList<>();
-        final AlertDialog.Builder alert = new AlertDialog.Builder(sender);
-        alert.setTitle(title);
-        alert.setMessage(message);
-        /*alert.setPositiveButton(R.string.button_save, (dialog, which) -> {
-            if(!input.getText().toString().equals("")){
-                ((ManageLists)sender).addObject(input.getText().toString());
-            }else{
-                Toast.makeText(sender,"Você não digitou um nome válido!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+        String[] discardsName = getAllDiscards(sender,pilot);
+
+        builder.setMultiChoiceItems(discardsName, null, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if(isChecked){
+                    discards.add(getRace(sender, discardsName, which));
+                }else{
+                    discards.remove(getRace(sender, discardsName, which));
+                }
             }
+        });
 
-        })*/
-        pilot = new Pilot("rei");
-        pilot.getRaces().add(new Race("1 bateria"));
+        builder.setPositiveButton(R.string.button_save, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ((ViewDiscards) sender).championship.getPilots().get(((ViewDiscards) sender).indexPilot)
+                        .setDiscards(discards);
+                ((ViewDiscards) sender).notifyChange();
+            }
+        });
 
-        alert.setMultiChoiceItems(getAllNames(pilot), null, (dialog, which, isChecked) -> System.out.println("teste"));
-        alert.show();
+        builder.show();
     }
 
-    private static String[] getAllNames(Pilot pilot){
-        List<String> response = new ArrayList<>();
-        for (Race x: pilot.getRaces()
-             ) {
-            response.add(x.getName());
+    private static String[] getAllDiscards(Context sender, Pilot pilot){
+        int quantityRaces = 0;
+        for (RaceSteps raceSteps: ((ViewDiscards) sender).championship.getSteps()) {
+            for(Race race : raceSteps.getRaces()){
+                if(race.getPilotsPosition().contains(pilot))
+                    quantityRaces++;
+            }
         }
-        return response.toArray(new String[0]);
+
+        String[] names = new String[quantityRaces];
+        int index = 0;
+        for (RaceSteps raceSteps : ((ViewDiscards) sender).championship.getSteps()) {
+            for(Race race : raceSteps.getRaces()){
+                if(race.getPilotsPosition().contains(pilot)) {
+                    names[index] = raceSteps.getName() + " - " + race.getName()
+                            + " - pts: "
+                            + race.getPointsPosition().get(race.getPilotsPosition().indexOf(pilot));
+                    index++;
+                }
+            }
+        }
+        return names;
+    }
+
+    private static Race getRace(Context sender, String[] names, int i){
+        ViewDiscards owner = (ViewDiscards) sender;
+        String[] split = names[i].split(" - ");
+        String nameStep = split[0];
+        String nameRace = split[1];
+        int indexStep = owner.championship.getSteps().indexOf(new RaceSteps(nameStep));
+        int indexRace = owner.championship.getSteps().get(indexStep).getRaces().indexOf(new Race(nameRace));
+        return owner.championship.getSteps().get(indexStep).getRaces().get(indexRace);
     }
 }

@@ -9,7 +9,6 @@
     android:layout_marginRight="5dp"
     android:layout_marginBottom="5dp"
     android:elevation="20dp"
-    android:onClick="btnCreateDiscard"
     app:cardBackgroundColor="@color/colorLightGrey"
     app:cardCornerRadius="5dp">
 
