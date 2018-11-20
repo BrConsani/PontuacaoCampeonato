@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -65,18 +64,10 @@ public class ViewRaceClassification extends AppCompatActivity{
                 setResult(RESULT_OK,intent);
                 finish();
                 break;
-            case R.id.navigation_points:
-                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_race_points, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     public void btnCreateRaceClassification(View view){
@@ -93,6 +84,7 @@ public class ViewRaceClassification extends AppCompatActivity{
 
     public void addObject() {
         championship.getSteps().get(indexStep).getRaces().get(indexRace).getPilotsPosition().add(new Pilot(""));
+        championship.getSteps().get(indexStep).getRaces().get(indexRace).getPointsPosition().add(null);
         cardViewAdapter.notifyItemInserted(cardViewAdapter.getItemCount());
         salvarObjeto();
     }

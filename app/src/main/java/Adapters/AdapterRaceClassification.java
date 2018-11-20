@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -36,6 +38,31 @@ public class AdapterRaceClassification extends RecyclerView.Adapter<RaceClassifi
                                                                         .getPilotsPosition().get(i).getName());
         holderStep.getPositionClassification().setText(String.format("%dº", (i+1)));
         holderStep.getSelf().setOnClickListener(view -> changePilot(i));
+
+        holderStep.getPoints().setText(String.format("%d", Integer.parseInt(owner.championship.getSteps().get(owner.indexStep)
+                                                            .getRaces().get(owner.indexRace)
+                                                            .getPointsPosition().get(i).toString())));
+        holderStep.getPoints().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                owner.championship.getSteps().get(owner.indexStep)
+                        .getRaces().get(owner.indexRace)
+                        .getPointsPosition().set(i,
+                        !holderStep.getPoints().getText().toString().equals("") ?
+                                Integer.parseInt(holderStep.getPoints().getText().toString()):null);
+                owner.salvarObjeto();
+            }
+        });
     }
 
     @Override

@@ -76,7 +76,7 @@ public class ViewSteps extends AppCompatActivity implements ManageLists {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_pilots, menu);
+        getMenuInflater().inflate(R.menu.menu_racesteps, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

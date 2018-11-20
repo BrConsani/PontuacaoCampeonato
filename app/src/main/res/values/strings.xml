@@ -28,10 +28,12 @@
     <string name="lb_erase_pilot">Deseja apagar o piloto?</string>
     <string name="lb_erase_discard">Deseja retirar o descarte?</string>
     <string name="lb_erase_race">Deseja apagar a bateria?</string>
+    <string name="lb_pts">pts:</string>
     <string name="toast_error_race_classification">Não existem mais competidores para serem removidos!</string>
     <string name="intent_championship">CHAMPIONSHIP</string>
     <string name="intent_indexC">INDEX_CHAMPIONSHIP</string>
     <string name="intent_indexS">INDEX_STEPS</string>
     <string name="intent_indexD">INDEX_DISCARDS</string>
     <string name="intent_indexR">INDEX_RACES</string>
+    <string name="hint_points">0</string>
 </resources>
