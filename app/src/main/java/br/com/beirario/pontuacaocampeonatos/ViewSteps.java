@@ -95,4 +95,11 @@ public class ViewSteps extends AppCompatActivity implements ManageLists {
         cardViewAdapter.notifyItemInserted(cardViewAdapter.getItemCount());
         salvarObjeto();
     }
+
+    public void showClassification(View view){
+        Intent intent = new Intent(this, ViewClassification.class);
+        intent.putExtra(this.getString(R.string.intent_championship), this.championship);
+        intent.putExtra(this.getString(R.string.intent_indexC), this.indexChampionship);
+        this.startActivityForResult(intent, 0);
+    }
 }

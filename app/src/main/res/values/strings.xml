@@ -10,6 +10,7 @@
     <string name="title_activity_discards">Descartes</string>
     <string name="title_activity_races">Baterias</string>
     <string name="title_activity_races_classification">Classificação da Bateria</string>
+    <string name="title_activity_classification">Classificação Geral</string>
     <string name="title_dialog_championship">Criar campeonato</string>
     <string name="title_dialog_racesteps">Criar etapa</string>
     <string name="title_dialog_pilot">Criar piloto</string>
@@ -31,6 +32,7 @@
     <string name="lb_erase_race">Deseja apagar a bateria?</string>
     <string name="lb_pts">pts:</string>
     <string name="lb_pole">Pole position:</string>
+    <string name="lb_classification">CLASSIFICAÇÃO</string>
     <string name="toast_error_race_classification">Não existem mais competidores para serem removidos!</string>
     <string name="intent_championship">CHAMPIONSHIP</string>
     <string name="intent_indexC">INDEX_CHAMPIONSHIP</string>
@@ -38,4 +40,5 @@
     <string name="intent_indexD">INDEX_DISCARDS</string>
     <string name="intent_indexR">INDEX_RACES</string>
     <string name="hint_points">0</string>
+    <string name="lb_use_discards">Usar descartes</string>
 </resources>

@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pilot implements Serializable {
+public class Pilot implements Serializable, Comparable<Pilot>{
 
     private String name;
-    private int points;
+    private int points = 0;
     private List<Race> races = new ArrayList<>();
     private List<Race> discards = new ArrayList<>();
 
@@ -26,6 +26,8 @@ public class Pilot implements Serializable {
     public int getPoints() {
         return points;
     }
+
+    public void setPoints(int points) { this.points = points;}
 
     public void addPoints(int points){
         this.points += points;
@@ -47,5 +49,10 @@ public class Pilot implements Serializable {
             equal = true;
         }
         return equal;
+    }
+
+    @Override
+    public int compareTo(Pilot o) {
+        return Integer.compare(o.getPoints(), this.points);
     }
 }

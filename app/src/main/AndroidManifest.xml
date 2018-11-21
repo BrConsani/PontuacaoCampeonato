@@ -58,6 +58,15 @@
                 android:value="br.com.beirario.pontuacaocampeonatos.ViewSteps" />
         </activity>
         <activity
+            android:name=".ViewClassification"
+            android:label="@string/title_activity_classification"
+            android:parentActivityName=".ViewSteps"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.beirario.pontuacaocampeonatos.ViewSteps" />
+        </activity>
+        <activity
             android:name=".ViewRaceClassification"
             android:label="@string/title_activity_races_classification"
             android:parentActivityName=".ViewRaces"

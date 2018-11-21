@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import Adapters.AdapterRaces;
 import Models.Championship;
@@ -99,7 +100,8 @@ public class ViewRaces extends AppCompatActivity implements ManageLists {
 
         builder.setItems(nomesPilotos(), (arg0, arg1) -> {
             this.championship.getSteps().get(this.indexStep).setPolePosition(this.championship.getPilots().get(arg1));
-            cardViewAdapter.notifyDataSetChanged();
+            TextView txt = poleCard.findViewById(R.id.nameCard);
+            txt.setText(championship.getSteps().get(indexStep).getPolePosition().getName());
             this.salvarObjeto();
         });
 
